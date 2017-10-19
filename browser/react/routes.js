@@ -18,25 +18,30 @@ import LyricsContainer from './containers/LyricsContainer';
 import StationsContainer from './containers/StationsContainer';
 import StationContainer from './containers/StationContainer';
 import SongsContainer from './containers/SongsContainer';
+import DashboardContainer from './containers/DashboardContainer';
 
 import { receiveAlbums, getAlbumById } from './action-creators/albums';
 import { receiveArtists, getArtistById } from './action-creators/artists';
 import { receivePlaylists, getPlaylistById } from './action-creators/playlists';
 import { loadAllSongs } from './action-creators/songs';
+import { receiveStyleGuides } from './action-creators/styleGuides';
+
 
 const onAppEnter = () => {
 
   const pAlbums = axios.get('/api/albums');
   const pArtists = axios.get('/api/artists');
   const pPlaylists = axios.get('/api/playlists');
+  
 
   return Promise
     .all([pAlbums, pArtists, pPlaylists])
     .then(responses => responses.map(r => r.data))
-    .then(([albums, artists, playlists]) => {
+    .then(([albums, artists, playlists, styleGuides]) => {
       store.dispatch(receiveAlbums(albums));
       store.dispatch(receiveArtists(artists));
       store.dispatch(receivePlaylists(playlists));
+      
     });
 };
 
@@ -60,6 +65,11 @@ const onStationsEnter = function (nextRouterState) {
   store.dispatch(loadAllSongs());
 };
 
+const onDashboardEnter = function (nextRouterState) {
+  store.dispatch(receiveStyleGuides());
+};
+
+
 export default function Root () {
   return (
     <Provider store={store}>
@@ -79,6 +89,7 @@ export default function Root () {
             <Route path="/stations/:genreName" component={StationContainer} />
             <IndexRoute component={StationsContainer} />
           </Route>
+          <Route path="/dashboard" component={DashboardContainer} onEnter={onDashboardEnter}/>
           <IndexRedirect to="/albums"/>
         </Route>
       </Router>

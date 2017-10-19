@@ -5,6 +5,8 @@ import artistsReducer from './artists-reducer';
 import albumsReducer from './albums-reducer';
 import playlistsReducer from './playlists-reducer';
 import songsReducer from './songs-reducer';
+import styleGuidesReducer from './styleGuides-reducer';
+
 
 export default combineReducers({
   lyrics: lyricsReducer,
@@ -12,5 +14,6 @@ export default combineReducers({
   artists: artistsReducer,
   albums: albumsReducer,
   playlists: playlistsReducer,
-  songs: songsReducer
+  songs: songsReducer,
+  styleGuides: styleGuidesReducer
 });

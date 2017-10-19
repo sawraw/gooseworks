@@ -10,6 +10,11 @@ require('./models');
 // Syncing all the models at once. This promise is used by main.js.
 var syncedDbPromise = db.sync();
 
+//drop all tables, data and resync?
+// var syncedDbPromise = db.sync({force:true});
+
+
+
 syncedDbPromise.then(function () {
   console.log(chalk.green('Sequelize models synced to PostgreSQL'));
 });

@@ -1,7 +1,7 @@
 {
-  "name": "juke",
+  "name": "gooseworks",
   "version": "1.0.0",
-  "description": "A generated project at Fullstack Academy",
+  "description": "A project by Sara Al Mughairy and Evan Scott Moore",
   "main": "server/main.js",
   "scripts": {
     "start": "webpack -w & nodemon --watch server -e js,html server/main.js",
